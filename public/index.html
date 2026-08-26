@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sozuri Bulk STK Push Top-Up</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
+    body { background-color: #f4f6f9; padding: 20px; color: #333; }
+    .container { max-width: 900px; margin: 0 auto; background: #fff; padding: 25px; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.08); }
+    h2 { margin-bottom: 20px; color: #1e293b; border-bottom: 2px solid #e2e8f0; padding-bottom: 10px; }
+    .form-group { margin-bottom: 15px; }
+    label { display: block; font-weight: 600; margin-bottom: 5px; color: #475569; }
+    input[type="text"], input[type="number"], textarea { width: 100%; padding: 10px; border: 1px solid #cbd5e1; border-radius: 6px; font-size: 14px; }
+    textarea { height: 120px; resize: vertical; }
+    .hint { font-size: 12px; color: #64748b; margin-top: 4px; }
+    button { background: #0284c7; color: white; border: none; padding: 12px 20px; font-size: 15px; border-radius: 6px; cursor: pointer; font-weight: 600; }
+    button:hover { background: #0369a1; }
+    .logs-header { margin-top: 30px; display: flex; justify-space-between; align-items: center; }
+    .log-table { width: 100%; border-collapse: collapse; margin-top: 10px; }
+    .log-table th, .log-table td { border: 1px solid #e2e8f0; padding: 10px; text-align: left; font-size: 13px; }
+    .log-table th { background: #f8fafc; }
+    .status-SUCCESS { color: #16a34a; font-weight: bold; }
+    .status-ERROR { color: #dc2626; font-weight: bold; }
+    .status-INFO { color: #2563eb; font-weight: bold; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>Wallet Credit Top-Up — Bulk STK Push</h2>
+    
+    <form id="stkForm">
+      <div class="form-group">
+        <label for="numbers">Phone Numbers (One per line or comma-separated)</label>
+        <textarea id="numbers" placeholder="0712345678&#10;0787654321&#10;254711223344" required></textarea>
+        <div class="hint">Formats accepted: 07XX..., 2547XX..., +2547XX...</div>
+      </div>
+
+      <div class="form-group">
+        <label for="amount">Amount (KES)</label>
+        <input type="number" id="amount" min="1" placeholder="500" required>
+      </div>
+
+      <div class="form-group">
+        <label for="reference">Account Reference (Max 12 Chars)</label>
+        <input type="text" id="reference" maxlength="12" placeholder="TOPUP-001">
+      </div>
+
+      <button type="submit" id="submitBtn">Start Bulk STK Push</button>
+    </form>
+
+    <div class="logs-header">
+      <h3>Live Execution Logs</h3>
+    </div>
+
+    <table class="log-table">
+      <thead>
+        <tr>
+          <th>Time</th>
+          <th>Phone</th>
+          <th>Amount</th>
+          <th>Reference</th>
+          <th>Status</th>
+          <th>Details</th>
+        </tr>
+      </thead>
+      <tbody id="logBody">
+        <tr><td colspan="6" style="text-align:center; color:#94a3b8;">No activity logged yet.</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
